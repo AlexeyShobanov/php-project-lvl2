@@ -1,0 +1,32 @@
+{
+    "name": "alshad/gendiff",
+    "description": "The second project in the profession of PHP training platform Hexlet",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Shobanov",
+            "email": "shobanov@gmail.com"
+        }
+    ],
+    "bin": [
+        "bin/gendiff"
+	],
+    "scripts": {
+        "phpcs": "phpcs"
+    },
+    "autoload": {
+        "files": [
+            "src/cli.php"
+        ],
+        "psr-4": {
+            
+        }
+    },
+    "require": {
+        "docopt/docopt": "^1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    }
+}
