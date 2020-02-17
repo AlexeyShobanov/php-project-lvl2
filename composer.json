@@ -17,7 +17,11 @@
     },
     "autoload": {
         "files": [
-            "src/cli.php"
+            "src/cli.php",
+            "src/parse-data.php",
+            "src/read-file.php",
+            "src/compare-data.php",
+            "src/generate-diff.php"
         ],
         "psr-4": {
             

@@ -2,6 +2,8 @@
 
 namespace Alshad\Gendiff\Cli;
 
+use function Alshad\Gendiff\Generate\Diff\generateDiff;
+
 function runCli()
 {
     $doc = <<<DOC
@@ -20,8 +22,7 @@ Options:
 DOC;
 
     $args = \Docopt::handle($doc, array('version' => 'Generate diff version 0.0.1'));
+    print_r($args['args']);
 
-    print_r($args);
-
-    return $args;
+    return generateDiff($args['firstFile'], $args['secondFile']);
 }

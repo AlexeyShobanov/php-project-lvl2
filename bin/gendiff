@@ -11,3 +11,8 @@ if (file_exists($autoloadPath1)) {
 }
 
 Alshad\Gendiff\Cli\runCli();
+
+//Alshad\Gendiff\Read\File\readFile("files/after.json");
+
+
+//Alshad\Gendiff\Compare\Data\compareData($data1, $data2);
