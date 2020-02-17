@@ -22,7 +22,6 @@ Options:
 DOC;
 
     $args = \Docopt::handle($doc, array('version' => 'Generate diff version 0.0.1'));
-    print_r($args['args']);
-
-    return generateDiff($args['firstFile'], $args['secondFile']);
+    
+    return generateDiff($args['<firstFile>'], $args['<secondFile>']);
 }
