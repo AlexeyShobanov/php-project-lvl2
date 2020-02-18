@@ -10,9 +10,21 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-Alshad\Gendiff\Cli\runCli();
+$doc = <<<DOC
+    
+Generate diff
 
-//Alshad\Gendiff\Read\File\readFile("files/after.json");
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
 
+Options:
+  -h --help                     Show this screen
+  -v --version                  Show version
+  --format <fmt>                Report format [default: pretty]
+DOC;
 
-//Alshad\Gendiff\Compare\Data\compareData($data1, $data2);
+$args = \Docopt::handle($doc, array('version' => 'Generate diff version 0.0.1'));
+
+Alshad\Gendiff\Generate\Diff\generateDiff($args['<firstFile>'], $args['<secondFile>']);

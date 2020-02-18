@@ -13,11 +13,12 @@
         "bin/gendiff"
 	],
     "scripts": {
-        "phpcs": "phpcs"
+        "phpcs": "phpcs",
+        "phpunit": "phpunit",
+        "test": "phpunit tests"
     },
     "autoload": {
         "files": [
-            "src/cli.php",
             "src/parse-data.php",
             "src/read-file.php",
             "src/compare-data.php",

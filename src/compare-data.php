@@ -5,6 +5,8 @@ namespace Alshad\Gendiff\Compare\Data;
 function compareData($data1, $data2)
 {
     $mergedData = array_merge($data1, $data2);
+    var_dump($mergedData);
+    print_r("\n");
     $comparedList = array_reduce(array_keys($mergedData), function ($acc, $key) use ($mergedData, $data1, $data2) {
         if (!array_key_exists($key, $data1)) {
             $acc[] = "  + {$key}: {$mergedData[$key]}";
@@ -19,7 +21,10 @@ function compareData($data1, $data2)
         return $acc;
     }, []);
 
+    var_dump($comparedList);
+    print_r("\n");
     $compareText = implode("\n", $comparedList);
+
 
     return "{\n{$compareText}\n}";
 }
