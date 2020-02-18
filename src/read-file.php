@@ -5,7 +5,7 @@ namespace Alshad\Gendiff\Read\File;
 function readFile($path)
 {
    
-    set_include_path(__DIR__ . "..");
+    set_include_path(getcwd());
 
     try {
         if (file_exists($path) && is_readable($path)) {
