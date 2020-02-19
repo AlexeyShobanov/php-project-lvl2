@@ -2,10 +2,6 @@ language: php
 php:
  - '7.2'
 
- env:
-  global:
-    - secure: "5fa93e5a3d247347c89b9502974e2d1a3e8c137ead49add357abc582d78ff759"
-
 install:
  - make install
  - travis_retry composer install --no-interaction --no-suggest
