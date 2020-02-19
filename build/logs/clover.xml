@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< Updated upstream
 <coverage generated="1582120563">
   <project timestamp="1582120563">
     <file name="/home/alexey/project/php-project-lvl2/src/compare.php">
+=======
+<coverage generated="1582089017">
+  <project timestamp="1582089017">
+    <file name="/home/vagrant/code/src/compare-data.php">
+>>>>>>> Stashed changes
       <line num="7" type="stmt" count="1"/>
       <line num="9" type="stmt" count="1"/>
       <line num="10" type="stmt" count="1"/>

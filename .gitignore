@@ -3,5 +3,6 @@
 .vagrant
 Vagrantfile
 *.log
+*.cache
 /vendor/
 .editorconfig
