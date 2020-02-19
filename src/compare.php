@@ -32,9 +32,9 @@ function compareData($data1, $data2)
                 ], [
                     'type' => 'removed',
                     'key' => $key,
-                    'value' => $data1[$key]]]
-            );
+                    'value' => $data1[$key]]]);
         }
+        
         return $acc;
     }, []);
 
