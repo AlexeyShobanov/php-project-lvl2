@@ -16,7 +16,6 @@ install:
   - ./cc-test-reporter before-build
 
 script: 
- - make lint
  - composer test -- --coverage-clover=coverage.xml
 
 #after_script:
