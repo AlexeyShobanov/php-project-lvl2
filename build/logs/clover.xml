@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< Updated upstream
-<coverage generated="1582120563">
-  <project timestamp="1582120563">
-    <file name="/home/alexey/project/php-project-lvl2/src/compare.php">
-=======
-<coverage generated="1582089017">
-  <project timestamp="1582089017">
-    <file name="/home/vagrant/code/src/compare-data.php">
->>>>>>> Stashed changes
+<coverage generated="1582135270">
+  <project timestamp="1582135270">
+    <file name="/home/vagrant/code/src/compare.php">
       <line num="7" type="stmt" count="1"/>
       <line num="9" type="stmt" count="1"/>
       <line num="10" type="stmt" count="1"/>
@@ -36,7 +30,7 @@
       <line num="41" type="stmt" count="1"/>
       <metrics loc="42" ncloc="42" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="26" elements="26" coveredelements="26"/>
     </file>
-    <file name="/home/alexey/project/php-project-lvl2/src/generate-diff.php">
+    <file name="/home/vagrant/code/src/generate-diff.php">
       <line num="12" type="stmt" count="1"/>
       <line num="13" type="stmt" count="1"/>
       <line num="14" type="stmt" count="1"/>
@@ -45,15 +39,16 @@
       <line num="17" type="stmt" count="1"/>
       <line num="18" type="stmt" count="1"/>
       <line num="19" type="stmt" count="1"/>
-      <line num="21" type="stmt" count="1"/>
-      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="9" coveredelements="9"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <metrics loc="23" ncloc="23" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="10" coveredelements="10"/>
     </file>
-    <file name="/home/alexey/project/php-project-lvl2/src/parse.php">
+    <file name="/home/vagrant/code/src/parse.php">
       <line num="7" type="stmt" count="1"/>
       <line num="8" type="stmt" count="1"/>
       <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="2" coveredelements="2"/>
     </file>
-    <file name="/home/alexey/project/php-project-lvl2/src/read-file.php">
+    <file name="/home/vagrant/code/src/read-file.php">
       <line num="8" type="stmt" count="1"/>
       <line num="11" type="stmt" count="1"/>
       <line num="12" type="stmt" count="1"/>
@@ -64,7 +59,7 @@
       <line num="22" type="stmt" count="0"/>
       <metrics loc="22" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="4" elements="8" coveredelements="4"/>
     </file>
-    <file name="/home/alexey/project/php-project-lvl2/src/render.php">
+    <file name="/home/vagrant/code/src/render.php">
       <line num="8" type="stmt" count="1"/>
       <line num="13" type="stmt" count="1"/>
       <line num="14" type="stmt" count="1"/>
@@ -75,6 +70,6 @@
       <line num="21" type="stmt" count="1"/>
       <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="8" coveredelements="8"/>
     </file>
-    <metrics files="5" loc="117" ncloc="113" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="49" elements="53" coveredelements="49"/>
+    <metrics files="5" loc="118" ncloc="114" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="54" coveredstatements="50" elements="54" coveredelements="50"/>
   </project>
 </coverage>

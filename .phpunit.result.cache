@@ -1,5 +1,1 @@
-<<<<<<< Updated upstream
-C:37:"PHPUnit\Runner\DefaultTestResultCache":166:{a:2:{s:7:"defects";a:1:{s:47:"Alshad\Gendiff\Tests\DiffTest::testGenerateDiff";i:3;}s:5:"times";a:1:{s:47:"Alshad\Gendiff\Tests\DiffTest::testGenerateDiff";d:0.014;}}}
-=======
-C:37:"PHPUnit\Runner\DefaultTestResultCache":166:{a:2:{s:7:"defects";a:1:{s:47:"Alshad\Gendiff\Tests\DiffTest::testGenerateDiff";i:3;}s:5:"times";a:1:{s:47:"Alshad\Gendiff\Tests\DiffTest::testGenerateDiff";d:0.089;}}}
->>>>>>> Stashed changes
+C:37:"PHPUnit\Runner\DefaultTestResultCache":107:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:1:{s:47:"Alshad\Gendiff\Tests\DiffTest::testGenerateDiff";d:0.049;}}}
