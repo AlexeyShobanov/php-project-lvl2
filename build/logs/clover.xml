@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1582061419">
-  <project timestamp="1582061419">
-    <file name="/home/vagrant/code/src/compare-data.php">
+<coverage generated="1582120563">
+  <project timestamp="1582120563">
+    <file name="/home/alexey/project/php-project-lvl2/src/compare.php">
       <line num="7" type="stmt" count="1"/>
-      <line num="8" type="stmt" count="1"/>
       <line num="9" type="stmt" count="1"/>
+      <line num="10" type="stmt" count="1"/>
       <line num="11" type="stmt" count="1"/>
       <line num="12" type="stmt" count="1"/>
       <line num="13" type="stmt" count="1"/>
-      <line num="14" type="stmt" count="1"/>
       <line num="15" type="stmt" count="1"/>
       <line num="16" type="stmt" count="1"/>
+      <line num="17" type="stmt" count="1"/>
       <line num="18" type="stmt" count="1"/>
       <line num="19" type="stmt" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
       <line num="24" type="stmt" count="1"/>
       <line num="25" type="stmt" count="1"/>
-      <line num="26" type="stmt" count="1"/>
+      <line num="28" type="stmt" count="1"/>
       <line num="29" type="stmt" count="1"/>
-      <metrics loc="30" ncloc="30" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="17" coveredelements="17"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <metrics loc="42" ncloc="42" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="26" elements="26" coveredelements="26"/>
     </file>
-    <file name="/home/vagrant/code/src/generate-diff.php">
-      <line num="11" type="stmt" count="1"/>
+    <file name="/home/alexey/project/php-project-lvl2/src/generate-diff.php">
       <line num="12" type="stmt" count="1"/>
       <line num="13" type="stmt" count="1"/>
       <line num="14" type="stmt" count="1"/>
@@ -31,23 +39,15 @@
       <line num="17" type="stmt" count="1"/>
       <line num="18" type="stmt" count="1"/>
       <line num="19" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="1"/>
       <line num="21" type="stmt" count="1"/>
-      <line num="22" type="stmt" count="1"/>
-      <line num="23" type="stmt" count="1"/>
-      <line num="24" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="1"/>
-      <line num="27" type="stmt" count="1"/>
-      <line num="28" type="stmt" count="1"/>
-      <line num="30" type="stmt" count="1"/>
-      <metrics loc="31" ncloc="31" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="18" coveredelements="18"/>
+      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="9" coveredelements="9"/>
     </file>
-    <file name="/home/vagrant/code/src/parse-data.php">
+    <file name="/home/alexey/project/php-project-lvl2/src/parse.php">
       <line num="7" type="stmt" count="1"/>
-      <line num="10" type="stmt" count="1"/>
-      <metrics loc="11" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="2" coveredelements="2"/>
+      <line num="8" type="stmt" count="1"/>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="2" coveredelements="2"/>
     </file>
-    <file name="/home/vagrant/code/src/read-file.php">
+    <file name="/home/alexey/project/php-project-lvl2/src/read-file.php">
       <line num="8" type="stmt" count="1"/>
       <line num="11" type="stmt" count="1"/>
       <line num="12" type="stmt" count="1"/>
@@ -58,6 +58,17 @@
       <line num="22" type="stmt" count="0"/>
       <metrics loc="22" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="4" elements="8" coveredelements="4"/>
     </file>
-    <metrics files="4" loc="94" ncloc="86" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="41" elements="45" coveredelements="41"/>
+    <file name="/home/alexey/project/php-project-lvl2/src/render.php">
+      <line num="8" type="stmt" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <line num="15" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="8" coveredelements="8"/>
+    </file>
+    <metrics files="5" loc="117" ncloc="113" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="49" elements="53" coveredelements="49"/>
   </project>
 </coverage>

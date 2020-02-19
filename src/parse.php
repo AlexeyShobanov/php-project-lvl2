@@ -1,11 +1,9 @@
 <?php
 
-namespace Alshad\Gendiff\Parse\Data;
+namespace Alshad\Gendiff\Parse;
 
 function parseData($data)
 {
     $parsedData = json_decode($data, true);
-    //print_r($parsedData);
-    //print_r("\n");
     return $parsedData;
 }

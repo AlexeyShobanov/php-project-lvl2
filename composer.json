@@ -19,9 +19,10 @@
     },
     "autoload": {
         "files": [
-            "src/parse-data.php",
+            "src/parse.php",
             "src/read-file.php",
-            "src/compare-data.php",
+            "src/compare.php",
+            "src/render.php",
             "src/generate-diff.php"
         ],
         "psr-4": {
