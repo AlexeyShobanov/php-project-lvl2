@@ -2,9 +2,18 @@ language: php
 php:
  - '7.2'
 
+ env:
+  global:
+    - CC_TEST_REPORTER_ID=47d9c898bdbd7e8e38be2516defc9e85f147c37320991a0cc216f2a79955f864
+
 install:
  - make install
  - travis_retry composer install --no-interaction --no-suggest
+
+ before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script: 
  - make lint
@@ -14,6 +23,5 @@ script:
 
 after_success:
 # Submit coverage report to https://codecov.io
-- bash <(curl -s https://codecov.io/bash)
-
-#after_failure:
+#- bash <(curl -s https://codecov.io/bash)
+- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
