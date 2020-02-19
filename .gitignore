@@ -6,3 +6,5 @@ Vagrantfile
 *.cache
 /vendor/
 .editorconfig
+.phpunit.result.cache
+/build/
