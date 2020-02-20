@@ -26,4 +26,5 @@ after_script:
 #- bash <(curl -s https://codecov.io/bash)
 #- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 - mv tests/_output/coverage.xml clover.xml 
-- ./cc-test-reporter after-build --coverage-input-type clover --id 4258b38823d2c1c860b0d96a8af0629fef59f99eee31edd139848cd19aca0d5e --exit-code $TRAVIS_TEST_RESULT
+#- ./cc-test-reporter after-build --coverage-input-type clover --id 4258b38823d2c1c860b0d96a8af0629fef59f99eee31edd139848cd19aca0d5e --exit-code $TRAVIS_TEST_RESULT
+- ./cc-test-reporter after-build --coverage-input-type clover --exit-code $TRAVIS_TEST_RESULT
