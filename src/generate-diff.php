@@ -9,10 +9,10 @@ use function Alshad\Gendiff\Render\renderAst;
 
 function generateDiff($path1, $path2)
 {
-    $data1 = readFile($path1);
-    $data2 = readFile($path2);
-    $parsedData1 = parseData($data1);
-    $parsedData2 = parseData($data2);
+    $fullData1 = readFile($path1);
+    $fullData2 = readFile($path2);
+    $parsedData1 = parseData($fullData1['data'], $fullData1['formatData']);
+    $parsedData2 = parseData($fullData2['data'], $fullData2['formatData']);
     $ast = compareData($parsedData1, $parsedData2);
     $result = renderAst($ast);
     print_r("\n");

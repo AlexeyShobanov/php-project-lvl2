@@ -19,7 +19,7 @@
     },
     "autoload": {
         "files": [
-            "src/parse.php",
+            "src/parses.php",
             "src/read-file.php",
             "src/compare.php",
             "src/render.php",
@@ -30,11 +30,11 @@
         }
     },
     "require": {
-        "docopt/docopt": "^1.0"
+        "docopt/docopt": "^1.0",
+        "symfony/yaml": "^5.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
-        "phpunit/phpunit": "^8.5",
-        "codeclimate/php-test-reporter": "*"
+        "phpunit/phpunit": "^8.5"
     }
 }
