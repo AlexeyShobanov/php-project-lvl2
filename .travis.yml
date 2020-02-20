@@ -15,7 +15,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script: 
-  - composer test -- --coverage-clover=coverage.xml
+  #- composer test -- --coverage-clover=coverage.xml
+  make test
 
 #after_script:
 
