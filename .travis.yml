@@ -2,29 +2,8 @@ language: php
 php:
  - '7.2'
 
- addons:
-  code_climate:
-    repo_token:
-      secure: "pOUvvKN97tQWbUo7eRvbpP3bVXyuIUFBGL5JaQWiECRCdVkh1kGkxDJDvQaaUjekIiCBUKmmCY1Cbrt2asC1ARPm6UkPKp0jX5y80dMqxFfkAVW/3Xf6f/XDGIUigRG+bj6b9k/C0VSSZK2VTwrXt4SJ1cNk8xX8I9bt06GYfxCFzsuju0Nhc0p55JE6diCNaWEFSjWKtTFHojTCzgCX/i7dCKt9eTFA9GoYdBxyHiLSmf/SgGANpaqI1aoK/Nn9tU4l3t3NNDHxBnbP9S2+Yo+tACaeDLwdpZ1KtA+4vQXq6Ys8F+a7zYFYE6RS8bpkT8ypk2nIi4yvX1a06JyIlCgAfLsY5hFqnQHyYxdE3dKi25uFVhrs1iWgeu/RnU703nuYdfMuh/Q0NaF4fKZv7+rekViaphqqHOH8N6bwhph4Qx08CQIVe9097eWuqfVL9EWKpF2gGK34LTUQR0UtM7TyM6QHxKs4FmuNxgRlKottkNyV0scUPW5oqJzH8lA0u0XTQUXdGWrWuGevAuVz+O673NqyZGFCl0iAri9i2a6Rx3xr0CuXmKFVs/Vo1zpzulAuuMBf+fHkPhSc1b373h3qTGuE0ZTUopaSOSpZJ7JZGWCT9vIHJmUlTDq6L5mYI2IlwbUJYQquFY6uYi+PBEXkw0sR/HRTQfM1F+S+3dE="
-
 install:
  - make install
- - travis_retry composer install --no-interaction --no-suggest
-
- before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
 script: 
- - composer test -- --coverage-clover=coverage.xml
-
-#after_script:
-
-after_script:
-# Submit coverage report to https://codecov.io
-#- bash <(curl -s https://codecov.io/bash)
-#- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-- mv tests/_output/coverage.xml clover.xml 
-#- ./cc-test-reporter after-build --coverage-input-type clover --id 4258b38823d2c1c860b0d96a8af0629fef59f99eee31edd139848cd19aca0d5e --exit-code $TRAVIS_TEST_RESULT
-- ./cc-test-reporter after-build --coverage-input-type clover --exit-code $TRAVIS_TEST_RESULT
+  make lint
