@@ -9,6 +9,22 @@ use function Alshad\Gendiff\Generate\Diff\generateDiff;
 
 class DiffTest extends TestCase
 {
+    public function testGenerateDiffByFlatJson()
+    {
+        $result = readFile('tests/fixtures/result_flat.txt')['data'];
+        $path1 = 'tests/fixtures/before_flat.json';
+        $path2 = 'tests/fixtures/after_flat.json';
+        $this->assertEquals($result, generateDiff($path1, $path2));
+    }
+
+    public function testGenerateDiffByFlatYaml()
+    {
+        $result = readFile('tests/fixtures/result_flat.txt')['data'];
+        $path1 = 'tests/fixtures/before_flat.yaml';
+        $path2 = 'tests/fixtures/after_flat.yaml';
+        $this->assertEquals($result, generateDiff($path1, $path2));
+    }
+
     public function testGenerateDiffByJson()
     {
         $result = readFile('tests/fixtures/result.txt')['data'];

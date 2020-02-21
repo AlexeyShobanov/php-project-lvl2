@@ -11,7 +11,7 @@
     ],
     "bin": [
         "bin/gendiff"
-	],
+    ],
     "scripts": {
         "phpcs": "phpcs",
         "phpunit": "phpunit",
