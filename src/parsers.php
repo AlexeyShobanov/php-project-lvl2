@@ -16,7 +16,5 @@ function parseData($data, $formatData)
     ];
 
     $parsedData = $mapForParser[$formatData]($data);
-    //print_r($parsedData);
-    //print_r("\n");
     return $parsedData;
 }

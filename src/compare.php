@@ -6,12 +6,15 @@ function makeAstForCompare($obj1, $obj2)
 {
     $makeAstForCompare = function ($obj1, $obj2) use (&$makeAstForCompare) {
         
-        $createNode = function ($type, $key, $value) {
-            return [
+        $createNode = function ($type, $key, $value) use (&$makeAstForCompare) {
+            return (is_object($value)) ? [
+                'type' => $type,
+                'key' => $key,
+                'children' => $makeAstForCompare($value, $value)
+                ] : [
                 'type' => $type,
                 'key' => $key,
                 'value' => $value
-                //'value' => (is_object($value) ? $createAstForNestedObj($value) : $value)
             ];
         };
 
@@ -25,11 +28,11 @@ function makeAstForCompare($obj1, $obj2)
                     $acc[] = $createNode('added', $key, $mergedData[$key]);
                 } elseif (!array_key_exists($key, $data2)) {
                     $acc[] = $createNode('removed', $key, $mergedData[$key]);
-                } elseif (is_object($data2[$key]) && is_object($data1[$key])) {
+                } elseif (is_object($data1[$key]) && is_object($data2[$key])) {
                     $acc[] = [
                         'type' => 'unchanged',
                         'key' => $key,
-                        'children' => $makeAstForCompare($data2[$key], $data1[$key])
+                        'children' => $makeAstForCompare($data1[$key], $data2[$key])
                     ];
                 } elseif ($data2[$key] === $data1[$key]) {
                     $acc[] = $createNode('unchanged', $key, $mergedData[$key]);

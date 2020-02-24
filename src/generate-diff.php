@@ -14,18 +14,6 @@ function generateDiff($path1, $path2)
     $parsedData1 = parseData($fullData1['data'], $fullData1['formatData']);
     $parsedData2 = parseData($fullData2['data'], $fullData2['formatData']);
     $ast = makeAstForCompare($parsedData1, $parsedData2);
-    print_r("\n");
-    print_r($ast);
-    print_r("\n");
-    //
-    //
     $result = renderAst($ast);
-    //
-    print_r("\n");
-    //
-    print_r($result);
-    //
-    print_r("\n");
-
-    //return $result;
+    return $result;
 }
