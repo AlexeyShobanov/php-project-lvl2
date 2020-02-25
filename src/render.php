@@ -12,8 +12,6 @@ define("BASE_INTENT", '  ');
 function renderAst($ast)
 {
     $renderAst = function ($ast, $root) use (&$renderAst) {
-        print_r($root);
-        print_r("\n");
         $textRepresentationOfNodes = array_map(function ($node) use (&$renderAst, $root) {
             ['type' => $type, 'key' => $key] = $node;
             $typeAsSymbol = MAP_TYPE_TO_SYMBOL[$type];

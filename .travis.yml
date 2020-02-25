@@ -14,13 +14,8 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
-script: 
-  #- composer test -- --coverage-clover=coverage.xml
+script:
   make test
 
-#after_script:
-
 after_script:
-  #- mv tests/_output/coverage.xml clover.xml 
   - ./cc-test-reporter after-build --coverage-input-type clover --exit-code $TRAVIS_TEST_RESULT
-  #- ./cc-test-reporter after-build --coverage-input-type clover --id 4258b38823d2c1c860b0d96a8af0629fef59f99eee31edd139848cd19aca0d5e --exit-code $TRAVIS_TEST_RESULT
