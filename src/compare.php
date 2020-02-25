@@ -6,7 +6,7 @@ function makeAstForCompare($obj1, $obj2)
 {
     $makeAstForCompare = function ($obj1, $obj2) use (&$makeAstForCompare) {
         
-        $createNode = function ($type, $key, $value) use (&$makeAstForCompare) {
+        $createNode = function ($type, $key, $value, $oldValue = null) use (&$makeAstForCompare) {
             return (is_object($value)) ? [
                 'type' => $type,
                 'key' => $key,
@@ -14,7 +14,8 @@ function makeAstForCompare($obj1, $obj2)
                 ] : [
                 'type' => $type,
                 'key' => $key,
-                'value' => $value
+                'value' => $value,
+                'oldValue' => $oldValue
             ];
         };
 
@@ -37,10 +38,7 @@ function makeAstForCompare($obj1, $obj2)
                 } elseif ($data2[$key] === $data1[$key]) {
                     $acc[] = $createNode('unchanged', $key, $mergedData[$key]);
                 } else {
-                    $acc = array_merge($acc, [
-                        $createNode('added', $key, $mergedData[$key]),
-                        $createNode('removed', $key, $data1[$key])
-                    ]);
+                    $acc[] = $createNode('changed', $key, $mergedData[$key], $data1[$key]);
                 }
                 return $acc;
             },

@@ -2,32 +2,18 @@
 
 namespace Alshad\Gendiff\Render;
 
-define("MAP_TYPE_TO_SYMBOL", [
-        'unchanged' => ' ',
-        'added' => '+',
-        'removed' => '-'
-    ]);
-define("BASE_INTENT", '  ');
+use function Alshad\Gendiff\Formatters\Pretty\renderAstForPrettyFormat;
+use function Alshad\Gendiff\Formatters\Plain\renderAstForPlainFormat;
 
-function renderAst($ast)
+
+define("MAP_FOR_FORMATTERS", [
+    'pretty' => 'Alshad\Gendiff\Formatters\Pretty\renderAstForPrettyFormat',
+    'plain' => 'Alshad\Gendiff\Formatters\Plain\renderAstForPlainFormat'
+]);
+
+function renderAst($ast, $format)
 {
-    $renderAst = function ($ast, $root) use (&$renderAst) {
-        $textRepresentationOfNodes = array_map(function ($node) use (&$renderAst, $root) {
-            ['type' => $type, 'key' => $key] = $node;
-            $typeAsSymbol = MAP_TYPE_TO_SYMBOL[$type];
-            $root .= BASE_INTENT;
-            if (array_key_exists('children', $node)) {
-                $modifiedValue = $renderAst($node['children'], "{$root}" . BASE_INTENT);
-            } else {
-                $value = $node['value'];
-                $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
-            }
-            return "{$root}{$typeAsSymbol} {$key}: {$modifiedValue}";
-        }, $ast);
-        $textRepresentationOfAst = implode("\n", $textRepresentationOfNodes);
+    $result = MAP_FOR_FORMATTERS[$format]($ast);
 
-        return "{\n{$textRepresentationOfAst}\n{$root}}";
-    };
-
-    return $renderAst($ast, '');
+    return $result;
 }

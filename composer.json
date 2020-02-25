@@ -23,6 +23,8 @@
             "src/read-file.php",
             "src/compare.php",
             "src/render.php",
+            "src/formatters/pretty.php",
+            "src/formatters/plain.php",
             "src/generate-diff.php"
         ],
         "psr-4": {

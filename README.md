@@ -24,25 +24,25 @@ https://asciinema.org/a/3h4A3SwHfa3gkwTXz6aEuFECz
 
 ### Generate diff for flat .json files (files are in the working directory)
 
-$gendiff <file1> <file2>
+$gendiff file1.json file2.json.
 
 https://asciinema.org/a/s2c69tbSLrGiWHI504UaLx89C
 
 ### Generate diff for flat .yaml files (files are in the working directory)
 
-$gendiff <file1> <file2>
+$gendiff file1.yaml file2.yaml
 
 https://asciinema.org/a/l2ivTFsa2PKke6sFa5qjr4LqW
 
 
 ### Generate diff for recursive .json files (files are in the working directory)
 
-$gendiff <file1> <file2>
+$gendiff file1.json file2.json
 
 https://asciinema.org/a/GQBqsKSybYeplw8HwX3LdXkC3
 
 ### Generate diff for recursive .yaml files (files are in the working directory)
 
-$gendiff <file1> <file2>
+$gendiff file1.yaml file2.yaml
 
 https://asciinema.org/a/hgeNt6HAMacIrTadwQ5WLKCPY
