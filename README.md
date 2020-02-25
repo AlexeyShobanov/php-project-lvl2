@@ -14,15 +14,11 @@ https://asciinema.org/a/9N560K0rdyDShhCh9I8aOP1ty
 
 ### Help and Version
 
-####Help call
-
 $ gendiff -h
-
-####Version information
 
 $ gendiff -v
 
-https://asciinema.org/a/DTZfKtmiweTf2gEUR2aEvUv3s
+https://asciinema.org/a/3h4A3SwHfa3gkwTXz6aEuFECz
 
 ## Compare 2 files
 
@@ -30,21 +26,23 @@ https://asciinema.org/a/DTZfKtmiweTf2gEUR2aEvUv3s
 
 $gendiff <file1> <file2>
 
-https://asciinema.org/a/9uQWIHm8RyfsuL6E7rWyS5Fdt
+https://asciinema.org/a/s2c69tbSLrGiWHI504UaLx89C
 
 ### Generate diff for flat .yaml files (files are in the working directory)
 
 $gendiff <file1> <file2>
 
-https://asciinema.org/a/c24UyAZC7Wc5i6n7h3A8ggAvt
+https://asciinema.org/a/l2ivTFsa2PKke6sFa5qjr4LqW
 
 
 ### Generate diff for recursive .json files (files are in the working directory)
 
 $gendiff <file1> <file2>
 
-https://asciinema.org/a/udUB8EddfcH0D5Wju1fxj3e5V
+https://asciinema.org/a/GQBqsKSybYeplw8HwX3LdXkC3
 
 ### Generate diff for recursive .yaml files (files are in the working directory)
 
 $gendiff <file1> <file2>
+
+https://asciinema.org/a/hgeNt6HAMacIrTadwQ5WLKCPY
