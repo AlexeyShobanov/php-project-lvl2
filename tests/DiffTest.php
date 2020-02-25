@@ -35,11 +35,11 @@ class DiffTest extends TestCase
         $this->assertEquals($result, generateDiff($path1, $path2));
     }
 
-    /*public function testGenerateDiffByYaml()
+    public function testGenerateDiffByYaml()
     {
         $result = readFile('tests/fixtures/result.txt')['data'];
         $path1 = 'tests/fixtures/before.yaml';
         $path2 = 'tests/fixtures/after.yaml';
         $this->assertEquals($result, generateDiff($path1, $path2));
-    }*/
+    }
 }

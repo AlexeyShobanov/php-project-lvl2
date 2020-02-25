@@ -7,6 +7,7 @@ define("MAP_TYPE_TO_SYMBOL", [
         'added' => '+',
         'removed' => '-'
     ]);
+define("BASE_INTENT", '  ');
 
 function renderAst($ast)
 {
@@ -16,9 +17,9 @@ function renderAst($ast)
         $textRepresentationOfNodes = array_map(function ($node) use (&$renderAst, $root) {
             ['type' => $type, 'key' => $key] = $node;
             $typeAsSymbol = MAP_TYPE_TO_SYMBOL[$type];
-            $root .= "  ";
+            $root .= BASE_INTENT;
             if (array_key_exists('children', $node)) {
-                $modifiedValue = $renderAst($node['children'], "{$root}  ");
+                $modifiedValue = $renderAst($node['children'], "{$root}" . BASE_INTENT);
             } else {
                 $value = $node['value'];
                 $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
