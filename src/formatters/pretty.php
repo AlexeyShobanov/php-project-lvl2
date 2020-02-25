@@ -12,9 +12,8 @@ define("BASE_INTENT", '  ');
 function renderAstForPrettyFormat($ast)
 {
     $renderAst = function ($ast, $root) use (&$renderAst) {
-        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $root){
+        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $root) {
             ['type' => $type, 'key' => $key] = $node;
-            //$typeAsSymbol = MAP_TYPE_TO_SYMBOL[$type];
             $root .= BASE_INTENT;
             if (array_key_exists('children', $node)) {
                 $modifiedValue = $renderAst($node['children'], "{$root}" . BASE_INTENT);
@@ -26,12 +25,14 @@ function renderAstForPrettyFormat($ast)
             }
             $newAcc = $type !== 'changed' ?
                 array_merge($acc, [$root . MAP_TYPE_TO_SYMBOL[$type] . " {$key}: {$modifiedValue}"]) :
-                array_merge($acc,
+                array_merge(
+                    $acc,
                     [$root . MAP_TYPE_TO_SYMBOL['added'] . " {$key}: {$modifiedValue}"],
-                    [$root . MAP_TYPE_TO_SYMBOL['removed'] . " {$key}: {$modifiedOldValue}"]);
+                    [$root . MAP_TYPE_TO_SYMBOL['removed'] . " {$key}: {$modifiedOldValue}"]
+                );
             return $newAcc;
         }, []);
-        
+
         $textRepresentationOfAst = implode("\n", $textRepresentationOfNodes);
 
         return "{\n{$textRepresentationOfAst}\n{$root}}";
