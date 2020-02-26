@@ -20,8 +20,10 @@ function renderAstForPrettyFormat($ast)
             } else {
                 $value = $node['value'];
                 $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
-                $oldValue = $node['oldValue'];
-                $modifiedOldValue = !is_bool($oldValue) ? $oldValue : ($oldValue === true ? 'true' : 'false');
+                if (isset($node['oldValue'])) {
+                    $oldValue = $node['oldValue'];
+                    $modifiedOldValue = !is_bool($oldValue) ? $oldValue : ($oldValue === true ? 'true' : 'false');
+                }
             }
             $newAcc = $type !== 'changed' ?
                 array_merge($acc, [$intent . MAP_TYPE_TO_SYMBOL[$type] . " {$key}: {$modifiedValue}"]) :
