@@ -11,12 +11,12 @@ define("BASE_INTENT", '  ');
 
 function renderAstForPrettyFormat($ast)
 {
-    $renderAst = function ($ast, $root) use (&$renderAst) {
-        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $root) {
+    $renderAst = function ($ast, $intent) use (&$renderAst) {
+        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $intent) {
             ['type' => $type, 'key' => $key] = $node;
-            $root .= BASE_INTENT;
+            $intent .= BASE_INTENT;
             if (array_key_exists('children', $node)) {
-                $modifiedValue = $renderAst($node['children'], "{$root}" . BASE_INTENT);
+                $modifiedValue = $renderAst($node['children'], "{$intent}" . BASE_INTENT);
             } else {
                 $value = $node['value'];
                 $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
@@ -24,18 +24,18 @@ function renderAstForPrettyFormat($ast)
                 $modifiedOldValue = !is_bool($oldValue) ? $oldValue : ($oldValue === true ? 'true' : 'false');
             }
             $newAcc = $type !== 'changed' ?
-                array_merge($acc, [$root . MAP_TYPE_TO_SYMBOL[$type] . " {$key}: {$modifiedValue}"]) :
+                array_merge($acc, [$intent . MAP_TYPE_TO_SYMBOL[$type] . " {$key}: {$modifiedValue}"]) :
                 array_merge(
                     $acc,
-                    [$root . MAP_TYPE_TO_SYMBOL['added'] . " {$key}: {$modifiedValue}"],
-                    [$root . MAP_TYPE_TO_SYMBOL['removed'] . " {$key}: {$modifiedOldValue}"]
+                    [$intent . MAP_TYPE_TO_SYMBOL['added'] . " {$key}: {$modifiedValue}"],
+                    [$intent . MAP_TYPE_TO_SYMBOL['removed'] . " {$key}: {$modifiedOldValue}"]
                 );
             return $newAcc;
         }, []);
 
         $textRepresentationOfAst = implode("\n", $textRepresentationOfNodes);
 
-        return "{\n{$textRepresentationOfAst}\n{$root}}";
+        return "{\n{$textRepresentationOfAst}\n{$intent}}";
     };
 
     return $renderAst($ast, '');

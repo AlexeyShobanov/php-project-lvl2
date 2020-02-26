@@ -11,18 +11,18 @@ class DiffTest extends TestCase
 {
     public function testGenerateDiffByFlatJson()
     {
-        $result = readFile('tests/fixtures/result_flat.txt')['data'];
-        $path1 = 'tests/fixtures/before_flat.json';
-        $path2 = 'tests/fixtures/after_flat.json';
+        $result = readFile('tests/fixtures/result-flat.txt')['data'];
+        $path1 = 'tests/fixtures/before-flat.json';
+        $path2 = 'tests/fixtures/after-flat.json';
         //print_r(generateDiff($path1, $path2));
         $this->assertEquals($result, generateDiff($path1, $path2));
     }
 
     public function testGenerateDiffByFlatYaml()
     {
-        $result = readFile('tests/fixtures/result_flat.txt')['data'];
-        $path1 = 'tests/fixtures/before_flat.yaml';
-        $path2 = 'tests/fixtures/after_flat.yaml';
+        $result = readFile('tests/fixtures/result-flat.txt')['data'];
+        $path1 = 'tests/fixtures/before-flat.yaml';
+        $path2 = 'tests/fixtures/after-flat.yaml';
         //print_r(generateDiff($path1, $path2));
         $this->assertEquals($result, generateDiff($path1, $path2));
     }
@@ -45,7 +45,7 @@ class DiffTest extends TestCase
 
     public function testGenDiffByJsonForPlainFormat()
     {
-        $result = readFile('tests/fixtures/result_plain.txt')['data'];
+        $result = readFile('tests/fixtures/result-plain.txt')['data'];
         $path1 = 'tests/fixtures/before.json';
         $path2 = 'tests/fixtures/after.json';
         $this->assertEquals($result, generateDiff($path1, $path2, 'plain'));
@@ -53,7 +53,7 @@ class DiffTest extends TestCase
 
     public function testGeneDiffByYamlForPlainFormat()
     {
-        $result = readFile('tests/fixtures/result_plain.txt')['data'];
+        $result = readFile('tests/fixtures/result-plain.txt')['data'];
         $path1 = 'tests/fixtures/before.yaml';
         $path2 = 'tests/fixtures/after.yaml';
         $this->assertEquals($result, generateDiff($path1, $path2, 'plain'));

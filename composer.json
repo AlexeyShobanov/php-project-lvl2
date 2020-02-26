@@ -25,6 +25,7 @@
             "src/render.php",
             "src/formatters/pretty.php",
             "src/formatters/plain.php",
+            "src/formatters/json.php",
             "src/generate-diff.php"
         ],
         "psr-4": {
