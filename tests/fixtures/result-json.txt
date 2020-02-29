@@ -1,41 +1,41 @@
 {
-    added: {
-        common: {
-            setting4: blah blah
-            setting5: {
-            key5: value5
+    "added": {
+        "common": {
+            "setting4": "blah blah",
+            "setting5": {
+                "key5": "value5"
+            }
+        },
+        "group3": {
+            "fee": "100500"
+        }
+    },
+    "removed": {
+        "common": {
+            "setting2": "200",
+            "setting6": {
+                "key": "value"
+            }
+        },
+        "group2": {
+            "abc": "12345"
+        }
+    },
+    "changed": {
+        "group1": {
+            "baz": {
+                "new": "bars",
+                "old": "bas"
             }
         }
-        group3: {
-            fee: 100500
-        }
-    }
-    removed: {
-        common: {
-            setting2: 200
-            setting6: {
-                key: value
-                }
-        }
-        group2: {
-            abc: 12345
-        }
-    }
-    changed: {
-        group1: {
-            baz: {
-                new: bars
-                old: bas
-            }
-        }
-    }
-    unchanged: {
-        common: {
-            setting1: Value 1
-            setting3: true
-        }
-        group1: {
-            foo: bar
+    },
+    "unchanged": {
+        "common": {
+            "setting1": "Value 1",
+            "setting3": true
+        },
+        "group1": {
+            "foo": "bar"
         }
     }
 }

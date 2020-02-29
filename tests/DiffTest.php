@@ -58,4 +58,20 @@ class DiffTest extends TestCase
         $path2 = 'tests/fixtures/after.yaml';
         $this->assertEquals($result, generateDiff($path1, $path2, 'plain'));
     }
+
+    public function testGenDiffByJsonForJsonFormat()
+    {
+        $result = readFile('tests/fixtures/result-json.txt')['data'];
+        $path1 = 'tests/fixtures/before.json';
+        $path2 = 'tests/fixtures/after.json';
+        $this->assertEquals($result, generateDiff($path1, $path2, 'json'));
+    }
+
+    public function testGeneDiffByYamlForJsonFormat()
+    {
+        $result = readFile('tests/fixtures/result-json.txt')['data'];
+        $path1 = 'tests/fixtures/before.yaml';
+        $path2 = 'tests/fixtures/after.yaml';
+        $this->assertEquals($result, generateDiff($path1, $path2, 'json'));
+    }
 }
