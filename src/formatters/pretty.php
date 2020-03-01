@@ -20,7 +20,7 @@ function renderAstForPrettyFormat($ast)
             } else {
                 $value = $node['value'];
                 $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
-                if (isset($node['oldValue'])) {
+                if ($node['oldValue']) {
                     $oldValue = $node['oldValue'];
                     $modifiedOldValue = !is_bool($oldValue) ? $oldValue : ($oldValue === true ? 'true' : 'false');
                 }
