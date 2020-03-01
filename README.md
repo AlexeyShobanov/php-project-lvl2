@@ -51,9 +51,10 @@ https://asciinema.org/a/hgeNt6HAMacIrTadwQ5WLKCPY
 
 $gendiff --format plain file1.json file2.json
 
-
+https://asciinema.org/a/EIcWFiEiNwMyANoBjFbcKBXu7
 
 ### Generate diff for recursive .json files (files are in the working directory) and output in format "json"
 
 $gendiff --format json file1.json file2.json
 
+https://asciinema.org/a/V0aWiNg63G6EW1sszyrR9RxIK
