@@ -7,9 +7,6 @@ use function Funct\Collection\flatten;
 function flattenAst($ast)
 {
     $flattenAst = function ($ast, $root) use (&$flattenAst) {
-        if (!is_array($ast) || !count($ast)) {
-            return null;
-        }
         $flatAst = array_reduce($ast, function ($acc, $node) use (&$flattenAst, $root) {
             if (array_key_exists('children', $node)) {
                 ['type' => $type, 'key' => $key] = $node;

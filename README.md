@@ -46,3 +46,14 @@ https://asciinema.org/a/GQBqsKSybYeplw8HwX3LdXkC3
 $gendiff file1.yaml file2.yaml
 
 https://asciinema.org/a/hgeNt6HAMacIrTadwQ5WLKCPY
+
+### Generate diff for recursive .json files (files are in the working directory) and output in format "plain"
+
+$gendiff --format plain file1.json file2.json
+
+
+
+### Generate diff for recursive .json files (files are in the working directory) and output in format "json"
+
+$gendiff --format json file1.json file2.json
+
