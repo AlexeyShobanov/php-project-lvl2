@@ -53,16 +53,18 @@ function renderAstForJsonFormat($ast)
 {
     $flatAst = flattenAst($ast);
     $renderAst = function ($flatAst) use (&$renderAst) {
-        $jsonRepresentationOfNodes = array_reduce($flatAst, function ($acc, $node) use (&$renderAst) {
-            ['type' => $type, 'key' => $key, 'value' => $value] = $node;
-            $formattedNodeValue = flattenValueNode($node);
-            if (array_key_exists($key, $acc[$type])) {
-                $acc[$type][$key] = array_merge($acc[$type][$key], $formattedNodeValue[$key]);
-            } else {
-                $acc[$type] = array_merge($acc[$type], $formattedNodeValue);
-            }
-            return $acc;
-        },
+        $jsonRepresentationOfNodes = array_reduce(
+            $flatAst,
+            function ($acc, $node) use (&$renderAst) {
+                $formattedNodeValue = flattenValueNode($node);
+                ['type' => $type, 'key' => $key, 'value' => $value] = $node;
+                if (array_key_exists($key, $acc[$type])) {
+                    $acc[$type][$key] = array_merge($acc[$type][$key], $formattedNodeValue[$key]);
+                } else {
+                    $acc[$type] = array_merge($acc[$type], $formattedNodeValue);
+                }
+                return $acc;
+            },
             ['added' => [], 'removed' => [], 'changed' => [], 'unchanged' => []]
         );
         return $jsonRepresentationOfNodes;
