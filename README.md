@@ -9,7 +9,7 @@
 
 $ composer global require alshad/gendiff
 
-https://asciinema.org/a/9N560K0rdyDShhCh9I8aOP1ty
+https://asciinema.org/a/fgL24h2P4rSsYnsFRjxW3iIoN
 
 ## CLI for Generate diff
 
@@ -27,26 +27,26 @@ https://asciinema.org/a/3h4A3SwHfa3gkwTXz6aEuFECz
 
 $gendiff file1.json file2.json.
 
-https://asciinema.org/a/s2c69tbSLrGiWHI504UaLx89C
+https://asciinema.org/a/dNepFcHJ4ZPoD92Rd8ZSWTdzx
 
 ### Generate diff for flat .yaml files (files are in the working directory)
 
 $gendiff file1.yaml file2.yaml
 
-https://asciinema.org/a/l2ivTFsa2PKke6sFa5qjr4LqW
+https://asciinema.org/a/1TgByMyPBKlBjIp1MfRMJCWNZ
 
 
 ### Generate diff for recursive .json files (files are in the working directory)
 
 $gendiff file1.json file2.json
 
-https://asciinema.org/a/GQBqsKSybYeplw8HwX3LdXkC3
+https://asciinema.org/a/6S60yo57AR5cAgHbKV9DSKa5y
 
 ### Generate diff for recursive .yaml files (files are in the working directory)
 
 $gendiff file1.yaml file2.yaml
 
-https://asciinema.org/a/hgeNt6HAMacIrTadwQ5WLKCPY
+https://asciinema.org/a/uUwbynJfhzrQqvFCqCnKlaCrr
 
 ### Generate diff for recursive .json files (files are in the working directory) and output in format "plain"
 
