@@ -18,14 +18,13 @@
     },
     "autoload": {
         "files": [
-            "src/parsers.php",
-            "src/read-file.php",
-            "src/compare.php",
-            "src/render.php",
-            "src/formatters/pretty.php",
-            "src/formatters/plain.php",
-            "src/formatters/json.php",
-            "src/generate-diff.php"
+            "src/Parsers.php",
+            "src/Compare.php",
+            "src/Render.php",
+            "src/formatters/Pretty.php",
+            "src/formatters/Plain.php",
+            "src/formatters/Json.php",
+            "src/Differ.php"
         ],
         "psr-4": {
             

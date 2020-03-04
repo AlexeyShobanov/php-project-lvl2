@@ -1,11 +1,26 @@
 <?php
 
-namespace Alshad\Gendiff\Generate\Diff;
+namespace Gendiff\Differ;
 
-use function Alshad\Gendiff\Read\File\readFile;
-use function Alshad\Gendiff\Parsers\parseData;
-use function Alshad\Gendiff\Compare\makeAstForCompare;
-use function Alshad\Gendiff\Render\renderAst;
+//use function Gendiff\Read\File\readFile;
+use function Gendiff\Parsers\parseData;
+use function Gendiff\Compare\makeAstForCompare;
+use function Gendiff\Render\renderAst;
+
+function readFile($path)
+{
+   
+    set_include_path(getcwd());
+
+    if (file_exists($path) && is_readable($path)) {
+        $data = file_get_contents($path, FILE_USE_INCLUDE_PATH);
+        $extention = pathinfo($path, PATHINFO_EXTENSION);
+        return ['data' => $data, 'formatData' => $extention];
+    } else {
+        throw new \Exception("Can't open file: {$path}");
+    }
+}
+
 
 function generateDiff($path1, $path2, $format = 'pretty')
 {

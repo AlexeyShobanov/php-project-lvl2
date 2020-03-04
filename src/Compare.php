@@ -1,6 +1,6 @@
 <?php
 
-namespace Alshad\Gendiff\Compare;
+namespace Gendiff\Compare;
 
 function makeAstForCompare($obj1, $obj2)
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Alshad\Gendiff\Formatters\Pretty;
+namespace Gendiff\Formatters\Pretty;
 
 define("MAP_TYPE_TO_SYMBOL", [
         'unchanged' => ' ',

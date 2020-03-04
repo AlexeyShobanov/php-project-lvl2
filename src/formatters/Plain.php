@@ -1,6 +1,6 @@
 <?php
 
-namespace Alshad\Gendiff\Formatters\Plain;
+namespace Gendiff\Formatters\Plain;
 
 function renderAstForPlainFormat($ast)
 {

@@ -27,4 +27,4 @@ DOC;
 
 $args = \Docopt::handle($doc, array('version' => 'Generate diff version 0.3.3'));
 
-Alshad\Gendiff\Generate\Diff\generateDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
+Gendiff\Differ\generateDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);

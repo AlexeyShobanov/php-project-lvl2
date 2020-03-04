@@ -1,6 +1,6 @@
 <?php
 
-namespace Alshad\Gendiff\Formatters\Json;
+namespace Gendiff\Formatters\Json;
 
 use function Funct\Collection\flatten;
 
