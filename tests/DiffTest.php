@@ -3,9 +3,9 @@
 namespace Alshad\Gendiff\Tests;
 
 use PHPUnit\Framework\TestCase;
+
 use function Alshad\Gendiff\Read\File\readFile;
 use function Alshad\Gendiff\Generate\Diff\generateDiff;
-
 
 class DiffTest extends TestCase
 {
