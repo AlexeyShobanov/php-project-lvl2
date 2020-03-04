@@ -8,35 +8,36 @@ use function Gendiff\Differ\generateDiff;
 
 class DifferTest extends TestCase
 {
-    public function testGenerateDiffByJson()
+    private const BEFORE_JSON_PATH = 'tests/fixtures/before.json';
+    private const AFTER_JSON_PATH = 'tests/fixtures/after.json';
+    private const BEFORE_YAML_PATH = 'tests/fixtures/before.yaml';
+    private const AFTER_YAML_PATH = 'tests/fixtures/after.yaml';
+    private const RESULT_JSON_PATH = 'tests/fixtures/result-in-json-format.txt';
+    private const RESULT_PLAIN_PATH = 'tests/fixtures/result-in-plain-format.txt';
+    private const RESULT_PRETTY_PATH = 'tests/fixtures/result-in-pretty-format.txt';
+
+    private function getRealPath($path)
     {
-        $result = file_get_contents('tests/fixtures/result-in-pretty-format.txt', FILE_USE_INCLUDE_PATH);
-        $path1 = 'tests/fixtures/before.json';
-        $path2 = 'tests/fixtures/after.json';
-        $this->assertEquals($result, generateDiff($path1, $path2));
+        $modifyPath = __DIR__ . "/../{$path}";
+        $absolutePath = realpath($modifyPath);
+        return $absolutePath;
     }
 
-    public function testGenerateDiffByYaml()
+    public function testGenerateDiffByJson()
     {
-        $result = file_get_contents('tests/fixtures/result-in-pretty-format.txt', FILE_USE_INCLUDE_PATH);
-        $path1 = 'tests/fixtures/before.yaml';
-        $path2 = 'tests/fixtures/after.yaml';
-        $this->assertEquals($result, generateDiff($path1, $path2));
+        $expected = file_get_contents($this->getRealPath(self::RESULT_PRETTY_PATH));
+        $this->assertEquals($expected, generateDiff(self::BEFORE_JSON_PATH, self::AFTER_JSON_PATH));
     }
 
     public function testGenDiffByJsonForPlainFormat()
     {
-        $result = file_get_contents('tests/fixtures/result-in-plain-format.txt', FILE_USE_INCLUDE_PATH);
-        $path1 = 'tests/fixtures/before.json';
-        $path2 = 'tests/fixtures/after.json';
-        $this->assertEquals($result, generateDiff($path1, $path2, 'plain'));
+        $expected = file_get_contents($this->getRealPath(self::RESULT_PLAIN_PATH));
+        $this->assertEquals($expected, generateDiff(self::BEFORE_YAML_PATH, self::AFTER_YAML_PATH, 'plain'));
     }
 
     public function testGenDiffByJsonForJsonFormat()
     {
-        $result = file_get_contents('tests/fixtures/result-in-json-format.txt', FILE_USE_INCLUDE_PATH);
-        $path1 = 'tests/fixtures/before.json';
-        $path2 = 'tests/fixtures/after.json';
-        $this->assertEquals($result, generateDiff($path1, $path2, 'json'));
+        $expected = file_get_contents($this->getRealPath(self::RESULT_JSON_PATH));
+        $this->assertEquals($expected, generateDiff(self::BEFORE_JSON_PATH, self::AFTER_JSON_PATH, 'json'));
     }
 }

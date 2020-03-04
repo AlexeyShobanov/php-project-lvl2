@@ -12,7 +12,7 @@ define("MAP_FOR_FORMATTERS", [
     'json' => 'Gendiff\Formatters\Json\renderAstForJsonFormat'
 ]);
 
-function renderAst($ast, $format)
+function render($ast, $format)
 {
     $result = MAP_FOR_FORMATTERS[$format]($ast);
 

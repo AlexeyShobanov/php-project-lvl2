@@ -2,8 +2,6 @@
 
 namespace Gendiff\Formatters\Json;
 
-use function Funct\Collection\flatten;
-
 function flattenAst($ast)
 {
     $flattenAst = function ($ast, $root) use (&$flattenAst) {

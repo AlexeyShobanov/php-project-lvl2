@@ -12,6 +12,9 @@ function parseData($data, $formatData)
         },
         'yaml' => function ($data) {
             return Yaml::parse($data, Yaml::PARSE_OBJECT_FOR_MAP);
+        },
+        'yml' => function ($data) {
+            return Yaml::parse($data, Yaml::PARSE_OBJECT_FOR_MAP);
         }
     ];
 
