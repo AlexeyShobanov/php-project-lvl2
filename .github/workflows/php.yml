@@ -1,6 +1,4 @@
 name: PHP CI
-with:
-  super_secret: ${{ secrets.MySecret }}
 
 on: [push]
 
