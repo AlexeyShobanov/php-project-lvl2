@@ -6,7 +6,7 @@ function flattenAst($ast)
 {
     $flattenAst = function ($ast, $root) use (&$flattenAst) {
         $flatAst = array_reduce($ast, function ($acc, $node) use (&$flattenAst, $root) {
-            if (array_key_exists('children', $node)) {
+            if (isset($node['children'])) {
                 ['type' => $type, 'key' => $key] = $node;
                 $newRoot =   ['type' => $type, 'key' => $key];
                 $flatAstChildren = $flattenAst($node['children'], $newRoot);
@@ -16,7 +16,7 @@ function flattenAst($ast)
             }
 
             if ($root) {
-                $type = $root['type'] === 'unchanged' ? $newNode['type'] : $root['type'];
+                $type = $root['type'] === 'nested' ? $newNode['type'] : $root['type'];
                 $newNodeModify = ['type' => $type, 'key' => $root['key'], 'value' => $newNode];
             } else {
                 $newNodeModify = $newNode;

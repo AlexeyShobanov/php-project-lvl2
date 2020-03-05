@@ -4,6 +4,17 @@ namespace Gendiff\Compare;
 
 use function Funct\Collection\union;
 
+function buildNode($type, $key, $value, $oldValue = null, $children = null)
+{
+    return [
+        'type' => $type,
+        'key' => $key,
+        'value' => $value,
+        'oldValue' => $oldValue,
+        'children' => $children
+    ];
+}
+
 function makeAst($obj1, $obj2)
 {
     $makeAst = function ($obj1, $obj2) use (&$makeAst) {
@@ -13,53 +24,24 @@ function makeAst($obj1, $obj2)
         $ast = array_map(function ($key) use ($data1, $data2, &$makeAst) {
             if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
                 if (is_object($data1[$key]) && is_object($data2[$key])) {
-                    return [
-                        'type' => 'unchanged',
-                        'key' => $key,
-                        'children' => $makeAst($data1[$key], $data2[$key])
-                    ];
+                    $children = $makeAst($data1[$key], $data2[$key]);
+                    return buildNode('nested', $key, null, null, $children);
                 } elseif ($data1[$key] === $data2[$key]) {
-                    return [
-                        'type' => 'unchanged',
-                        'key' => $key,
-                        'value' => $data1[$key],
-                        'oldValue' => null
-                    ];
+                    return buildNode('unchanged', $key, $data1[$key]);
                 }
-                return [
-                        'type' => 'changed',
-                        'key' => $key,
-                        'value' => $data2[$key],
-                        'oldValue' => $data1[$key]
-                    ];
+                return buildNode('changed', $key, $data2[$key], $data1[$key]);
             } elseif (array_key_exists($key, $data1)) {
-                if (is_object($data1[$key])) {
-                    return [
-                        'type' => 'removed',
-                        'key' => $key,
-                        'children' => $makeAst($data1[$key], $data1[$key])
-                    ];
-                }
-                return [
-                        'type' => 'removed',
-                        'key' => $key,
-                        'value' => $data1[$key],
-                        'oldValue' => null
-                    ];
+                /*if (is_object($data1[$key])) {
+                    //$children = $makeAst($data1[$key], $data1[$key]);
+                    return  buildNode('removed', $key, null, null, $data1[$key]);
+                }*/
+                return buildNode('removed', $key, $data1[$key]);
             }
-            if (is_object($data2[$key])) {
-                return [
-                        'type' => 'added',
-                        'key' => $key,
-                        'children' => $makeAst($data2[$key], $data2[$key])
-                    ];
-            }
-            return [
-                    'type' => 'added',
-                    'key' => $key,
-                    'value' => $data2[$key],
-                    'oldValue' => null
-                ];
+            /*if (is_object($data2[$key])) {
+                //$children = $makeAst($data2[$key], $data2[$key]);
+                return  buildNode('added', $key, null, null, $data2[$key]);
+            } */
+            return buildNode('added', $key, $data2[$key]);
         }, $unionKeys);
 
         return $ast;

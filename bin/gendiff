@@ -25,6 +25,6 @@ Options:
   --format <fmt>                Report format [default: pretty]
 DOC;
 
-$args = \Docopt::handle($doc, array('version' => 'Generate diff 0.3.3'));
+$args = \Docopt::handle($doc, array('version' => '0.3.3'));
 
 echo (Gendiff\Differ\generateDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']));

@@ -7,9 +7,9 @@ function renderAstForPlainFormat($ast)
     $renderAst = function ($ast, $root) use (&$renderAst) {
         $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use ($root, &$renderAst) {
             ['type' => $type, 'key' => $key] = $node;
-            if (array_key_exists('children', $node)) {
+            if (isset($node['children'])) {
                 switch ($type) {
-                    case 'unchanged':
+                    case 'nested':
                         $acc[] = $renderAst($node['children'], "{$root}{$key}.");
                         break;
                     case 'removed':

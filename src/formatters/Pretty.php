@@ -9,29 +9,43 @@ define("MAP_TYPE_TO_SYMBOL", [
     ]);
 define("BASE_INTENT", '  ');
 
+
 function renderAstForPrettyFormat($ast)
 {
-    $renderAst = function ($ast, $intent) use (&$renderAst) {
-        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $intent) {
-            ['type' => $type, 'key' => $key] = $node;
+    
+    $getValue = function ($node, $intent) use (&$renderAst) {
+        if ($type === 'nested') {
+            return $renderAst($node['children'], "{$intent}" . BASE_INTENT);
+        } elseif (is_object($value)) {
+            $data = (array)$value;
+            print_r($data);
+        }
+        return !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
+    };
+
+
+    $renderAst = function ($ast, $intent) use (&$renderAst, &$makeKeyValuePairText) {
+        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, &$makeKeyValuePairText, $intent) {
+            ['type' => $type, 'key' => $key, 'value' => $value, 'oldValue' => $oldValue] = $node;
             $intent .= BASE_INTENT;
-            if (array_key_exists('children', $node)) {
-                $modifiedValue = $renderAst($node['children'], "{$intent}" . BASE_INTENT);
-            } else {
-                $value = $node['value'];
-                $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
-                if ($node['oldValue']) {
-                    $oldValue = $node['oldValue'];
-                    $modifiedOldValue = !is_bool($oldValue) ? $oldValue : ($oldValue === true ? 'true' : 'false');
+            $keyValuePairText = $makeKeyValuePairText($node);
+
+            switch ($type) {
+                    case 'changed':
+                        $keyOldValuePairText = $makeKeyValuePairText($type, $key, $oldValue);
+                        return array_merge(
+                            $acc,
+                            [$intent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],
+                            [$intent . MAP_TYPE_TO_SYMBOL['removed'] . $keyOldValuePairText]
+                        );
+                    case 'added':
+                    case 'removed':
+                    case 'unchanged':
+                        return array_merge($acc, [$intent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
+                    default:
+                        throw new \Exception("Unknown node state: {$type}");
                 }
-            }
-            $newAcc = $type !== 'changed' ?
-                array_merge($acc, [$intent . MAP_TYPE_TO_SYMBOL[$type] . " {$key}: {$modifiedValue}"]) :
-                array_merge(
-                    $acc,
-                    [$intent . MAP_TYPE_TO_SYMBOL['added'] . " {$key}: {$modifiedValue}"],
-                    [$intent . MAP_TYPE_TO_SYMBOL['removed'] . " {$key}: {$modifiedOldValue}"]
-                );
+
             return $newAcc;
         }, []);
 

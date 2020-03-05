@@ -28,9 +28,6 @@ function generateDiff($path1, $path2, $format = 'pretty')
         $parsedData2 = parseData($data2, $extentionFile2);
         $ast = makeAst($parsedData1, $parsedData2);
         $result = render($ast, $format);
-        //print_r("\n");
-        //print_r($result);
-        //print_r("\n");
         return $result;
     } catch (\Exception $e) {
         echo "Unknown order state: ", $e->getMessage(), "\n";
