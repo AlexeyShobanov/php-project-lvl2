@@ -41,7 +41,7 @@ function makeValueJsonNode($node)
         $valueJsonNode = [$key => $modifiedValue];
         return $valueJsonNode;
     };
-    return $makeValueJsonNode($node);  
+    return $makeValueJsonNode($node);
 }
 
 function renderAstForJsonFormat($ast)
@@ -58,9 +58,9 @@ function renderAstForJsonFormat($ast)
                 $acc[$type] = array_merge($acc[$type], $valueJsonNode);
             }
             return $acc;
-            },
+        },
         ['added' => [], 'removed' => [], 'changed' => [], 'unchanged' => []]
-        );
+    );
     $result = json_encode($jsonNodes, JSON_PRETTY_PRINT);
     return $result;
 }
