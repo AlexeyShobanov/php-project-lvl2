@@ -27,10 +27,13 @@ function generateDiff($path1, $path2, $format = 'pretty')
         $parsedData1 = parseData($data1, $extentionFile1);
         $parsedData2 = parseData($data2, $extentionFile2);
         $ast = makeAst($parsedData1, $parsedData2);
+        print_r('\n');
+        print_r($ast);
+        print_r('\n');
         $result = render($ast, $format);
-        print_r('\n');
-        print_r($result);
-        print_r('\n');
+        //print_r('\n');
+        //print_r($result);
+        //print_r('\n');
 
         return $result;
     } catch (\Exception $e) {
