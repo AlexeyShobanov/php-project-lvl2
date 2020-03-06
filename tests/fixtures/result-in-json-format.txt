@@ -24,8 +24,8 @@
     "changed": {
         "group1": {
             "baz": {
-                "new": "bars",
-                "old": "bas"
+                "newValue": "bars",
+                "oldValue": "bas"
             }
         }
     },
