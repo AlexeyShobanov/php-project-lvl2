@@ -2,7 +2,7 @@
 
 namespace Gendiff\Formatters\Json;
 
-function renderAstForJsonFormat($ast)
+function makeNode($type)
 {
     $mapForTypeNode = [
         'unchanged' => function ($node) {
@@ -39,8 +39,13 @@ function renderAstForJsonFormat($ast)
         }
     ];
 
-    $renderAst = function ($ast) use (&$renderAst, $mapForTypeNode) {
-        $jsonRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $mapForTypeNode) {
+    return $mapForTypeNode[$type];
+}
+
+function renderAstForJsonFormat($ast)
+{
+    $renderAst = function ($ast) use (&$renderAst) {
+        $jsonRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst) {
             ['type' => $type, 'key' => $key] = $node;
             switch ($type) {
                 case 'nested':
@@ -53,7 +58,7 @@ function renderAstForJsonFormat($ast)
                 case 'changed':
                 case 'added':
                 case 'removed':
-                    return array_merge($acc, $mapForTypeNode[$type]($node));
+                    return array_merge($acc, makeNode($type)($node));
                 default:
                     throw new \Exception("Unknown node state: {$type}");
             }
