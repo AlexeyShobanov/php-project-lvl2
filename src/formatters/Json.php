@@ -2,65 +2,44 @@
 
 namespace Gendiff\Formatters\Json;
 
-function flattenAst($ast)
+function renderAstForJsonFormat($ast)
 {
-    $flattenAst = function ($ast, $root) use (&$flattenAst) {
-        $flatAst = array_reduce($ast, function ($acc, $node) use (&$flattenAst, $root) {
-            $type = $node['type'];
+    $renderAst = function ($ast) use (&$renderAst) {
+        $jsonRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst) {
+            ['type' => $type, 'key' => $key, 'value' => $value, 'oldValue' => $oldValue] = $node;
+            $modifiedValue = is_object($value) ? (array)$value : $value;
+            $modifiedOldValue = is_object($oldValue) ? (array)$value : $oldValue;
             switch ($type) {
                 case 'nested':
-                    $newNode = $flattenAst($node['children'], $node);
-                    return array_merge($acc, $newNode);
+                    $keyValuePair = [$key => $renderAst($node['children'])];
+                    return array_merge(
+                        $acc,
+                        [$key => $renderAst($node['children'])]
+                    );
                 case 'unchanged':
-                case 'removed':
-                case 'added':
+                    return array_merge($acc, [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedValue]
+                    ]);
                 case 'changed':
-                    $newNode = $root ?
-                    array_merge($root, ['type' => $type, 'value' => $node, 'children' => null]) :
-                    $node;
-                    $acc[] = $newNode;
-                    return  $acc;
+                    return array_merge($acc, [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedOldValue]
+                    ]);
+                case 'added':
+                    return array_merge($acc, [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => null]
+                    ]);
+                case 'removed':
+                    return array_merge($acc, [$key =>
+                        ['type' => $type, 'currentValue' => null, 'oldValue' => $modifiedValue]
+                    ]);
                 default:
                     throw new \Exception("Unknown node state: {$type}");
             }
         }, []);
-        return $flatAst;
+        return $jsonRepresentationOfNodes;
     };
 
-    return ($flattenAst($ast, ''));
-}
+    $result = json_encode($renderAst($ast), JSON_PRETTY_PRINT);
 
-function makeValueJsonNode($node)
-{
-    $makeValueJsonNode = function ($node) use (&$makeValueJsonNode) {
-        ['type' => $type, 'key' => $key, 'value' => $value, 'oldValue' => $oldValue] = $node;
-        $modifiedValue = is_array($value) ?
-        $makeValueJsonNode($value) :
-        ($node['oldValue'] ? ['newValue' => $value, 'oldValue' => $node['oldValue']] : $value);
-
-        $valueJsonNode = [$key => $modifiedValue];
-        return $valueJsonNode;
-    };
-    return $makeValueJsonNode($node);
-}
-
-function renderAstForJsonFormat($ast)
-{
-    $flatAst = flattenAst($ast);
-    $jsonNodes = array_reduce(
-        $flatAst,
-        function ($acc, $node) {
-            $valueJsonNode = makeValueJsonNode($node);
-            ['type' => $type, 'key' => $key] = $node;
-            if (array_key_exists($key, $acc[$type])) {
-                $acc[$type][$key] = array_merge($acc[$type][$key], $valueJsonNode[$key]);
-            } else {
-                $acc[$type] = array_merge($acc[$type], $valueJsonNode);
-            }
-            return $acc;
-        },
-        ['added' => [], 'removed' => [], 'changed' => [], 'unchanged' => []]
-    );
-    $result = json_encode($jsonNodes, JSON_PRETTY_PRINT);
     return $result;
 }

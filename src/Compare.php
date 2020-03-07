@@ -31,16 +31,8 @@ function makeAst($obj1, $obj2)
                 }
                 return buildNode('changed', $key, $data2[$key], $data1[$key]);
             } elseif (array_key_exists($key, $data1)) {
-                /*if (is_object($data1[$key])) {
-                    //$children = $makeAst($data1[$key], $data1[$key]);
-                    return  buildNode('removed', $key, null, null, $data1[$key]);
-                }*/
                 return buildNode('removed', $key, $data1[$key]);
             }
-            /*if (is_object($data2[$key])) {
-                //$children = $makeAst($data2[$key], $data2[$key]);
-                return  buildNode('added', $key, null, null, $data2[$key]);
-            } */
             return buildNode('added', $key, $data2[$key]);
         }, $unionKeys);
 

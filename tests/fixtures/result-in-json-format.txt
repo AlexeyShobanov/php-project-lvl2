@@ -1,41 +1,64 @@
 {
-    "added": {
-        "common": {
-            "setting4": "blah blah",
-            "setting5": {
-                "key5": "value5"
-            }
+    "common": {
+        "setting1": {
+            "type": "unchanged",
+            "currentValue": "Value 1",
+            "oldValue": "Value 1"
         },
-        "group3": {
-            "fee": "100500"
-        }
-    },
-    "removed": {
-        "common": {
-            "setting2": "200",
-            "setting6": {
+        "setting2": {
+            "type": "removed",
+            "currentValue": null,
+            "oldValue": "200"
+        },
+        "setting3": {
+            "type": "unchanged",
+            "currentValue": true,
+            "oldValue": true
+        },
+        "setting6": {
+            "type": "removed",
+            "currentValue": null,
+            "oldValue": {
                 "key": "value"
             }
         },
-        "group2": {
+        "setting4": {
+            "type": "added",
+            "currentValue": "blah blah",
+            "oldValue": null
+        },
+        "setting5": {
+            "type": "added",
+            "currentValue": {
+                "key5": "value5"
+            },
+            "oldValue": null
+        }
+    },
+    "group1": {
+        "baz": {
+            "type": "changed",
+            "currentValue": "bars",
+            "oldValue": "bas"
+        },
+        "foo": {
+            "type": "unchanged",
+            "currentValue": "bar",
+            "oldValue": "bar"
+        }
+    },
+    "group2": {
+        "type": "removed",
+        "currentValue": null,
+        "oldValue": {
             "abc": "12345"
         }
     },
-    "changed": {
-        "group1": {
-            "baz": {
-                "newValue": "bars",
-                "oldValue": "bas"
-            }
-        }
-    },
-    "unchanged": {
-        "common": {
-            "setting1": "Value 1",
-            "setting3": true
+    "group3": {
+        "type": "added",
+        "currentValue": {
+            "fee": "100500"
         },
-        "group1": {
-            "foo": "bar"
-        }
+        "oldValue": null
     }
 }

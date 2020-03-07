@@ -8,60 +8,65 @@ define("MAP_TYPE_TO_SYMBOL", [
         'added' => '+',
         'removed' => '-'
     ]);
-define("BASE_INTENT", '  ');
+define("BASE_INDENT", '  ');
 
-function makeTextRepresentationOfObj($obj, $intent)
+function makeTextRepresentationOfObj($obj, $indent)
 {
     $data = (array)$obj;
-    $keyValuePairs = array_map(function ($subKey) use ($data, $intent) {
+    $keyValuePairs = array_map(function ($subKey) use ($data, $indent) {
         $keyValuePair = " {$subKey}: {$data[$subKey]}";
-        return $intent . BASE_INTENT . ' ' . $keyValuePair;
+        return $indent . BASE_INDENT . ' ' . $keyValuePair;
     }, array_keys($data));
     $keyValuePairsText = implode("\n", $keyValuePairs);
-    return "{\n{$keyValuePairsText}\n{$intent}}";
+    return "{\n{$keyValuePairsText}\n{$indent}}";
 }
 
-function makeKeyValuePairText($node, $intent, &$renderAst, $selectedValue = 'value')
+function stringify($node, $degreeOfNesting, &$renderAst, $selectedValue = 'value')
 {
     ['type' => $type, 'key' => $key] = $node;
     $value = $node[$selectedValue];
+    $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
     if ($type === 'nested') {
-        $modifiedValue = $renderAst($node['children'], $intent . BASE_INTENT);
-    } elseif (is_object($value)) {
-        $modifiedValue = makeTextRepresentationOfObj($value, $intent . BASE_INTENT);
-    } else {
-        $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
+        $modifiedValue = $renderAst($node['children'], $degreeOfNesting + 1);
+        return " {$key}: {$modifiedValue}";
     }
+    if (is_object($value)) {
+        $modifiedValue = makeTextRepresentationOfObj($value, $indent);
+         return " {$key}: {$modifiedValue}";
+    }
+    $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
     return " {$key}: {$modifiedValue}";
 }
 
 function renderAstForPrettyFormat($ast)
 {
-    $renderAst = function ($ast, $intent) use (&$renderAst) {
-        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $intent) {
+    $renderAst = function ($ast, $degreeOfNesting) use (&$renderAst) {
+
+        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $degreeOfNesting) {
             $type = $node['type'];
-            $intent .= BASE_INTENT;
-            $keyValuePairText = makeKeyValuePairText($node, $intent, $renderAst);
+            $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
+            $keyValuePairText = stringify($node, $degreeOfNesting + 1, $renderAst);
             switch ($type) {
                 case 'changed':
-                    $keyOldValuePairText = makeKeyValuePairText($node, $intent, $renderAst, 'oldValue');
+                    $keyOldValuePairText = stringify($node, $degreeOfNesting + 1, $renderAst, 'oldValue');
                     return array_merge(
                         $acc,
-                        [$intent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],
-                        [$intent . MAP_TYPE_TO_SYMBOL['removed'] . $keyOldValuePairText]
+                        [$indent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],
+                        [$indent . MAP_TYPE_TO_SYMBOL['removed'] . $keyOldValuePairText]
                     );
                 case 'nested':
                 case 'added':
                 case 'removed':
                 case 'unchanged':
-                    return array_merge($acc, [$intent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
+                    return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
                 default:
                     throw new \Exception("Unknown node state: {$type}");
             }
             return $newAcc;
         }, []);
         $textRepresentationOfAst = implode("\n", $textRepresentationOfNodes);
-        return "{\n{$textRepresentationOfAst}\n{$intent}}";
+        $indent = str_repeat(BASE_INDENT, $degreeOfNesting);
+        return "{\n{$textRepresentationOfAst}\n{$indent}}";
     };
-    return $renderAst($ast, '');
+    return $renderAst($ast, 0);
 }
