@@ -4,11 +4,44 @@ namespace Gendiff\Formatters\Json;
 
 function renderAstForJsonFormat($ast)
 {
-    $renderAst = function ($ast) use (&$renderAst) {
-        $jsonRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst) {
+    $mapForTypeNode = [
+        'unchanged' => function ($node) {
+            ['type' => $type, 'key' => $key, 'value' => $value] = $node;
+            $modifiedValue = is_object($value) ? (array)$value : $value;
+            return [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedValue]
+                    ];
+        },
+                    
+        'changed' => function ($node) {
             ['type' => $type, 'key' => $key, 'value' => $value, 'oldValue' => $oldValue] = $node;
             $modifiedValue = is_object($value) ? (array)$value : $value;
             $modifiedOldValue = is_object($oldValue) ? (array)$value : $oldValue;
+            return [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedOldValue]
+                    ];
+        },
+                    
+        'added' => function ($node) {
+            ['type' => $type, 'key' => $key, 'value' => $value] = $node;
+            $modifiedValue = is_object($value) ? (array)$value : $value;
+            return [$key =>
+                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => null]
+                    ];
+        },
+                    
+        'removed' => function ($node) {
+            ['type' => $type, 'key' => $key, 'value' => $value] = $node;
+            $modifiedValue = is_object($value) ? (array)$value : $value;
+             return [$key =>
+                        ['type' => $type, 'currentValue' => null, 'oldValue' => $modifiedValue]
+                    ];
+        }
+    ];
+
+    $renderAst = function ($ast) use (&$renderAst, $mapForTypeNode) {
+        $jsonRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $mapForTypeNode) {
+            ['type' => $type, 'key' => $key] = $node;
             switch ($type) {
                 case 'nested':
                     $keyValuePair = [$key => $renderAst($node['children'])];
@@ -17,21 +50,10 @@ function renderAstForJsonFormat($ast)
                         [$key => $renderAst($node['children'])]
                     );
                 case 'unchanged':
-                    return array_merge($acc, [$key =>
-                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedValue]
-                    ]);
                 case 'changed':
-                    return array_merge($acc, [$key =>
-                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => $modifiedOldValue]
-                    ]);
                 case 'added':
-                    return array_merge($acc, [$key =>
-                        ['type' => $type, 'currentValue' => $modifiedValue, 'oldValue' => null]
-                    ]);
                 case 'removed':
-                    return array_merge($acc, [$key =>
-                        ['type' => $type, 'currentValue' => null, 'oldValue' => $modifiedValue]
-                    ]);
+                    return array_merge($acc, $mapForTypeNode[$type]($node));
                 default:
                     throw new \Exception("Unknown node state: {$type}");
             }
