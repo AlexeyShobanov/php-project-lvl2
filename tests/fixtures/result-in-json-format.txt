@@ -1,64 +1,96 @@
 {
-    "common": {
-        "setting1": {
-            "type": "unchanged",
-            "currentValue": "Value 1",
-            "oldValue": "Value 1"
-        },
-        "setting2": {
-            "type": "removed",
-            "currentValue": null,
-            "oldValue": "200"
-        },
-        "setting3": {
-            "type": "unchanged",
-            "currentValue": true,
-            "oldValue": true
-        },
-        "setting6": {
-            "type": "removed",
-            "currentValue": null,
-            "oldValue": {
-                "key": "value"
-            }
-        },
-        "setting4": {
-            "type": "added",
-            "currentValue": "blah blah",
-            "oldValue": null
-        },
-        "setting5": {
-            "type": "added",
-            "currentValue": {
-                "key5": "value5"
+    "0": {
+        "type": "nested",
+        "key": "common",
+        "value": null,
+        "oldValue": null,
+        "children": {
+            "0": {
+                "type": "unchanged",
+                "key": "setting1",
+                "value": "Value 1",
+                "oldValue": null,
+                "children": null
             },
-            "oldValue": null
+            "1": {
+                "type": "removed",
+                "key": "setting2",
+                "value": "200",
+                "oldValue": null,
+                "children": null
+            },
+            "2": {
+                "type": "unchanged",
+                "key": "setting3",
+                "value": true,
+                "oldValue": null,
+                "children": null
+            },
+            "3": {
+                "type": "removed",
+                "key": "setting6",
+                "value": {
+                    "key": "value"
+                },
+                "oldValue": null,
+                "children": null
+            },
+            "6": {
+                "type": "added",
+                "key": "setting4",
+                "value": "blah blah",
+                "oldValue": null,
+                "children": null
+            },
+            "7": {
+                "type": "added",
+                "key": "setting5",
+                "value": {
+                    "key5": "value5"
+                },
+                "oldValue": null,
+                "children": null
+            }
         }
     },
-    "group1": {
-        "baz": {
-            "type": "changed",
-            "currentValue": "bars",
-            "oldValue": "bas"
-        },
-        "foo": {
-            "type": "unchanged",
-            "currentValue": "bar",
-            "oldValue": "bar"
-        }
+    "1": {
+        "type": "nested",
+        "key": "group1",
+        "value": null,
+        "oldValue": null,
+        "children": [
+            {
+                "type": "changed",
+                "key": "baz",
+                "value": "bars",
+                "oldValue": "bas",
+                "children": null
+            },
+            {
+                "type": "unchanged",
+                "key": "foo",
+                "value": "bar",
+                "oldValue": null,
+                "children": null
+            }
+        ]
     },
-    "group2": {
+    "2": {
         "type": "removed",
-        "currentValue": null,
-        "oldValue": {
+        "key": "group2",
+        "value": {
             "abc": "12345"
-        }
+        },
+        "oldValue": null,
+        "children": null
     },
-    "group3": {
+    "5": {
         "type": "added",
-        "currentValue": {
+        "key": "group3",
+        "value": {
             "fee": "100500"
         },
-        "oldValue": null
+        "oldValue": null,
+        "children": null
     }
 }

@@ -21,52 +21,55 @@ function makeTextRepresentationOfObj($obj, $indent)
     return "{\n{$keyValuePairsText}\n{$indent}}";
 }
 
-function stringify($node, $degreeOfNesting, &$renderAst, $selectedValue = 'value')
+function stringify($key, $value, $degreeOfNesting)
 {
-    ['type' => $type, 'key' => $key] = $node;
-    $value = $node[$selectedValue];
     $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
-    if ($type === 'nested') {
-        $modifiedValue = $renderAst($node['children'], $degreeOfNesting + 1);
-        return " {$key}: {$modifiedValue}";
-    }
     if (is_object($value)) {
         $modifiedValue = makeTextRepresentationOfObj($value, $indent);
          return " {$key}: {$modifiedValue}";
     }
-    $modifiedValue = !is_bool($value) ? $value : ($value === true ? 'true' : 'false');
+    if (!is_bool($value)) {
+        return " {$key}: {$value}";
+    }
+    $modifiedValue = $value ? 'true' : 'false';
     return " {$key}: {$modifiedValue}";
 }
 
 function renderAstForPrettyFormat($ast)
 {
-    $renderAst = function ($ast, $degreeOfNesting) use (&$renderAst) {
-
-        $textRepresentationOfNodes = array_reduce($ast, function ($acc, $node) use (&$renderAst, $degreeOfNesting) {
-            $type = $node['type'];
-            $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
-            $keyValuePairText = stringify($node, $degreeOfNesting + 1, $renderAst);
-            switch ($type) {
-                case 'changed':
-                    $keyOldValuePairText = stringify($node, $degreeOfNesting + 1, $renderAst, 'oldValue');
-                    return array_merge(
-                        $acc,
-                        [$indent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],
-                        [$indent . MAP_TYPE_TO_SYMBOL['removed'] . $keyOldValuePairText]
-                    );
-                case 'nested':
-                case 'added':
-                case 'removed':
-                case 'unchanged':
-                    return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
-                default:
-                    throw new \Exception("Unknown node state: {$type}");
-            }
-            return $newAcc;
-        }, []);
+    $renderAstForPrettyFormat = function ($ast, $degreeOfNesting) use (&$renderAstForPrettyFormat) {
+        $textRepresentationOfNodes = array_reduce(
+            $ast,
+            function ($acc, $node) use (&$renderAstForPrettyFormat, $degreeOfNesting) {
+                ['type' => $type, 'key' => $key, 'value' => $value, 'oldValue' => $oldValue] = $node;
+                $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
+                switch ($type) {
+                    case 'nested':
+                        $modifiedValue = $renderAstForPrettyFormat($node['children'], $degreeOfNesting + 2);
+                        $keyValuePairText = stringify($key, $modifiedValue, $degreeOfNesting + 1);
+                        return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
+                    case 'added':
+                    case 'removed':
+                    case 'unchanged':
+                        $keyValuePairText = stringify($key, $value, $degreeOfNesting + 1);
+                        return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
+                    case 'changed':
+                        $keyValuePairText = stringify($key, $value, $degreeOfNesting + 1);
+                        $keyOldValuePairText = stringify($key, $oldValue, $degreeOfNesting + 1);
+                        return array_merge(
+                            $acc,
+                            [$indent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],
+                            [$indent . MAP_TYPE_TO_SYMBOL['removed'] . $keyOldValuePairText]
+                        );
+                    default:
+                        throw new \Exception("Unknown node state: {$type}");
+                }
+            },
+            []
+        );
         $textRepresentationOfAst = implode("\n", $textRepresentationOfNodes);
         $indent = str_repeat(BASE_INDENT, $degreeOfNesting);
         return "{\n{$textRepresentationOfAst}\n{$indent}}";
     };
-    return $renderAst($ast, 0);
+    return $renderAstForPrettyFormat($ast, 0);
 }
