@@ -35,8 +35,8 @@ function makeAst($obj1, $obj2)
             }
             return buildNode('added', $key, $data2[$key]);
         }, $unionKeys);
-
-        return $ast;
+        $resultAst = array_values($ast);
+        return $resultAst;
     };
     return $makeAst($obj1, $obj2);
 }

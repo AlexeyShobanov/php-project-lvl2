@@ -10,21 +10,21 @@
                 "key": "setting1",
                 "value": "Value 1",
                 "oldValue": null,
-                "children": []
+                "children": {}
             },
             "1": {
                 "type": "removed",
                 "key": "setting2",
                 "value": "200",
                 "oldValue": null,
-                "children": []
+                "children": {}
             },
             "2": {
                 "type": "unchanged",
                 "key": "setting3",
                 "value": true,
                 "oldValue": null,
-                "children": []
+                "children": {}
             },
             "3": {
                 "type": "removed",
@@ -33,23 +33,23 @@
                     "key": "value"
                 },
                 "oldValue": null,
-                "children": []
+                "children": {}
             },
-            "6": {
+            "4": {
                 "type": "added",
                 "key": "setting4",
                 "value": "blah blah",
                 "oldValue": null,
-                "children": []
+                "children": {}
             },
-            "7": {
+            "5": {
                 "type": "added",
                 "key": "setting5",
                 "value": {
                     "key5": "value5"
                 },
                 "oldValue": null,
-                "children": []
+                "children": {}
             }
         }
     },
@@ -58,22 +58,22 @@
         "key": "group1",
         "value": null,
         "oldValue": null,
-        "children": [
-            {
+        "children": {
+            "0": {
                 "type": "changed",
                 "key": "baz",
                 "value": "bars",
                 "oldValue": "bas",
-                "children": []
+                "children": {}
             },
-            {
+            "1": {
                 "type": "unchanged",
                 "key": "foo",
                 "value": "bar",
                 "oldValue": null,
-                "children": []
+                "children": {}
             }
-        ]
+        }
     },
     "2": {
         "type": "removed",
@@ -82,15 +82,15 @@
             "abc": "12345"
         },
         "oldValue": null,
-        "children": []
+        "children": {}
     },
-    "5": {
+    "3": {
         "type": "added",
         "key": "group3",
         "value": {
             "fee": "100500"
         },
         "oldValue": null,
-        "children": []
+        "children": {}
     }
 }
