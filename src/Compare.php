@@ -4,7 +4,7 @@ namespace Gendiff\Compare;
 
 use function Funct\Collection\union;
 
-function buildNode($type, $key, $value, $oldValue = null, $children = null)
+function buildNode($type, $key, $value, $oldValue = null, $children = [])
 {
     return [
         'type' => $type,

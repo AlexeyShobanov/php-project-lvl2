@@ -10,21 +10,21 @@
                 "key": "setting1",
                 "value": "Value 1",
                 "oldValue": null,
-                "children": null
+                "children": []
             },
             "1": {
                 "type": "removed",
                 "key": "setting2",
                 "value": "200",
                 "oldValue": null,
-                "children": null
+                "children": []
             },
             "2": {
                 "type": "unchanged",
                 "key": "setting3",
                 "value": true,
                 "oldValue": null,
-                "children": null
+                "children": []
             },
             "3": {
                 "type": "removed",
@@ -33,14 +33,14 @@
                     "key": "value"
                 },
                 "oldValue": null,
-                "children": null
+                "children": []
             },
             "6": {
                 "type": "added",
                 "key": "setting4",
                 "value": "blah blah",
                 "oldValue": null,
-                "children": null
+                "children": []
             },
             "7": {
                 "type": "added",
@@ -49,7 +49,7 @@
                     "key5": "value5"
                 },
                 "oldValue": null,
-                "children": null
+                "children": []
             }
         }
     },
@@ -64,14 +64,14 @@
                 "key": "baz",
                 "value": "bars",
                 "oldValue": "bas",
-                "children": null
+                "children": []
             },
             {
                 "type": "unchanged",
                 "key": "foo",
                 "value": "bar",
                 "oldValue": null,
-                "children": null
+                "children": []
             }
         ]
     },
@@ -82,7 +82,7 @@
             "abc": "12345"
         },
         "oldValue": null,
-        "children": null
+        "children": []
     },
     "5": {
         "type": "added",
@@ -91,6 +91,6 @@
             "fee": "100500"
         },
         "oldValue": null,
-        "children": null
+        "children": []
     }
 }

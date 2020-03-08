@@ -21,18 +21,16 @@ function makeTextRepresentationOfObj($obj, $indent)
     return "{\n{$keyValuePairsText}\n{$indent}}";
 }
 
-function stringify($key, $value, $degreeOfNesting)
+function stringify($value, $degreeOfNesting)
 {
     $indent = str_repeat(BASE_INDENT, $degreeOfNesting + 1);
     if (is_object($value)) {
-        $modifiedValue = makeTextRepresentationOfObj($value, $indent);
-         return " {$key}: {$modifiedValue}";
+        return makeTextRepresentationOfObj($value, $indent);
     }
-    if (!is_bool($value)) {
-        return " {$key}: {$value}";
+    if (is_bool($value)) {
+        return $value ? 'true' : 'false';
     }
-    $modifiedValue = $value ? 'true' : 'false';
-    return " {$key}: {$modifiedValue}";
+    return $value;
 }
 
 function renderAstForPrettyFormat($ast)
@@ -46,16 +44,20 @@ function renderAstForPrettyFormat($ast)
                 switch ($type) {
                     case 'nested':
                         $modifiedValue = $renderAstForPrettyFormat($node['children'], $degreeOfNesting + 2);
-                        $keyValuePairText = stringify($key, $modifiedValue, $degreeOfNesting + 1);
+                        $preparedValue = stringify($modifiedValue, $degreeOfNesting + 1);
+                        $keyValuePairText = " {$key}: {$preparedValue}";
                         return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
                     case 'added':
                     case 'removed':
                     case 'unchanged':
-                        $keyValuePairText = stringify($key, $value, $degreeOfNesting + 1);
+                        $preparedValue = stringify($value, $degreeOfNesting + 1);
+                        $keyValuePairText = " {$key}: {$preparedValue}";
                         return array_merge($acc, [$indent . MAP_TYPE_TO_SYMBOL[$type] . $keyValuePairText]);
                     case 'changed':
-                        $keyValuePairText = stringify($key, $value, $degreeOfNesting + 1);
-                        $keyOldValuePairText = stringify($key, $oldValue, $degreeOfNesting + 1);
+                        $preparedValue = stringify($value, $degreeOfNesting + 1);
+                        $keyValuePairText = " {$key}: {$preparedValue}";
+                        $preparedOldValue = stringify($oldValue, $degreeOfNesting + 1);
+                        $keyOldValuePairText = " {$key}: {$preparedOldValue}";
                         return array_merge(
                             $acc,
                             [$indent . MAP_TYPE_TO_SYMBOL['added'] . $keyValuePairText],

@@ -27,7 +27,6 @@
             "src/Differ.php"
         ],
         "psr-4": {
-            
         }
     },
     "require": {
