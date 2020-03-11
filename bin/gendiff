@@ -27,4 +27,9 @@ DOC;
 
 $args = \Docopt::handle($doc, array('version' => '0.3.4'));
 
-echo (Gendiff\Differ\generateDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']));
+try {
+	echo (Gendiff\Differ\generateDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']));
+
+} catch (\Exception $e) {
+	echo "Error:", $e->getMessage(), "\n";
+}

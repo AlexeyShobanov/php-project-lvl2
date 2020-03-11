@@ -2,6 +2,11 @@
 
 namespace Gendiff\Formatters\Plain;
 
+function stringifyValue($value)
+{
+    return is_object($value) ? 'complex value' : $value;
+}
+
 function renderAstForPlainFormat($ast)
 {
     $renderAst = function ($ast, $root) use (&$renderAst) {
@@ -17,11 +22,13 @@ function renderAstForPlainFormat($ast)
                     $acc[] = "Property '{$root}{$key}' was removed";
                     break;
                 case 'added':
-                    $valueAsText = is_object($value) ? 'complex value' : $value;
+                    $valueAsText = stringifyValue($value);
                     $acc[] = "Property '{$root}{$key}' was added with value: '{$valueAsText}'";
                     break;
                 case 'changed':
-                    $acc[] = "Property '{$root}{$key}' was changed. From '{$oldValue}' to '{$value}'";
+                    $valueAsText = stringifyValue($value);
+                    $oldValueAsText = stringifyValue($oldValue);
+                    $acc[] = "Property '{$root}{$key}' was changed. From '{$oldValueAsText}' to '{$valueAsText}'";
                     break;
                 default:
                     throw new \Exception("Unknown node state: {$type}");

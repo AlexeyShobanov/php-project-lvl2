@@ -6,11 +6,11 @@ use function Gendiff\Formatters\Pretty\renderAstForPrettyFormat;
 use function Gendiff\Formatters\Plain\renderAstForPlainFormat;
 use function Gendiff\Formatters\Json\renderAstForJsonFormat;
 
-define("MAP_FOR_FORMATTERS", [
+const MAP_FOR_FORMATTERS = [
     'pretty' => 'Gendiff\Formatters\Pretty\renderAstForPrettyFormat',
     'plain' => 'Gendiff\Formatters\Plain\renderAstForPlainFormat',
     'json' => 'Gendiff\Formatters\Json\renderAstForJsonFormat'
-]);
+];
 
 function render($ast, $format)
 {
