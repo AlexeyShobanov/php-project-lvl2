@@ -27,6 +27,12 @@ function stringify($value, $depth)
     return $value;
 }
 
+function stringifyKeyValuePair($value, $key, $depth)
+{
+    $preparedValue = stringify($value, $depth + 1);
+    return " {$key}: {$preparedValue}";
+}
+
 function renderAstForPrettyFormat($ast)
 {
     $renderAstForPrettyFormat = function ($ast, $depth) use (&$renderAstForPrettyFormat) {
@@ -38,26 +44,20 @@ function renderAstForPrettyFormat($ast)
                 switch ($type) {
                     case 'nested':
                         $modifiedValue = $renderAstForPrettyFormat($node['children'], $depth + 2);
-                        $preparedValue = stringify($modifiedValue, $depth + 1);
-                        $keyValuePairText = " {$key}: {$preparedValue}";
+                        $keyValuePairText = stringifyKeyValuePair($modifiedValue, $key, $depth);
                         return array_merge($acc, [$indent . ' ' . $keyValuePairText]);
                     case 'added':
-                        $preparedValue = stringify($value, $depth + 1);
-                        $keyValuePairText = " {$key}: {$preparedValue}";
+                        $keyValuePairText = stringifyKeyValuePair($value, $key, $depth);
                         return array_merge($acc, [$indent . '+' . $keyValuePairText]);
                     case 'removed':
-                        $preparedValue = stringify($value, $depth + 1);
-                        $keyValuePairText = " {$key}: {$preparedValue}";
+                        $keyValuePairText = stringifyKeyValuePair($value, $key, $depth);
                         return array_merge($acc, [$indent . '-' . $keyValuePairText]);
                     case 'unchanged':
-                        $preparedValue = stringify($value, $depth + 1);
-                        $keyValuePairText = " {$key}: {$preparedValue}";
+                        $keyValuePairText = stringifyKeyValuePair($value, $key, $depth);
                         return array_merge($acc, [$indent . ' ' . $keyValuePairText]);
                     case 'changed':
-                        $preparedValue = stringify($value, $depth + 1);
-                        $keyValuePairText = " {$key}: {$preparedValue}";
-                        $preparedOldValue = stringify($oldValue, $depth + 1);
-                        $keyOldValuePairText = " {$key}: {$preparedOldValue}";
+                        $keyValuePairText = stringifyKeyValuePair($value, $key, $depth);
+                        $keyOldValuePairText = stringifyKeyValuePair($oldValue, $key, $depth);
                         return array_merge(
                             $acc,
                             [$indent . '+' . $keyValuePairText],
